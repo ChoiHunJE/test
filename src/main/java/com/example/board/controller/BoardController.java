@@ -48,7 +48,7 @@ public class BoardController {
 	@GetMapping("write")
 	public String wirteForm(Model model,
 							@SessionAttribute(name = "loginMember", required = false) Member loginMember) {
-		log.info("writeForm() 실행");
+		log.info("writeForm() 실행!!");
 		if(loginMember == null) {
 			log.info("로그인 하지 않은 회원입니다.");
 			return "redirect:/member/login";
