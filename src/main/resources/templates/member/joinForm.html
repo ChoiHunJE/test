@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>회원가입</title>
+<link rel="stylesheet" href="/default.css">
+</head>
+<body>
+<div id="container">
+<h1>[ 회원가입 폼 ]</h1>
+	<form action="/member/join" method="post" th:object="${member}">
+	<div th:if="${#fields.hasGlobalErrors()}">
+		<p class="error" th:each="err : ${#fields.globalErrors()}" th:text="${err}">...</p>
+	</div>
+		<table>
+			<tr>
+				<th>아이디</th>
+				<td>
+				<input type="text" th:field="*{member_id}">
+				<div th:errors="*{member_id}" class="error"></div>
+				</td>
+			</tr>
+			<tr>
+				<th>패스워드</th>
+				<td>
+				<input type="password" th:field="*{password}">
+				<div th:errors="*{password}" class="error"></div>
+				</td>
+			</tr>
+			<tr>
+				<th>이름</th>
+				<td>
+				<input type="text" th:field="*{name}">
+				<div th:errors="*{name}" class="error"></div>
+				</td>
+			</tr>
+			<tr>
+				<th>성별</th>
+				<td>
+					<!-- <label for="gender1">남성</label>
+					<input type="radio" th:field="*{gender}" value="MALE">
+					<label for="gender1">여성</label>
+					<input type="radio" th:field="*{gender}" value="FEMALE"> -->
+					<th:block th:each="gender : ${T(com.example.board.model.member.GenderType).values()}">
+						[[${gender.description}]]<input type="radio" th:field="*{gender}" th:value="${gender}">
+					</th:block>
+					<div th:errors="*{gender}" class="error"></div>
+				</td>
+			</tr>
+			<tr>
+				<th>생년월일</th>
+				<td>
+				<input type="date" th:field="*{birth}">
+				<div th:errors="*{birth}" class="error"></div>
+				</td>
+			</tr>
+			<tr>
+				<th>이메일</th>
+				<td><input type="text" th:field="*{email}"></td>
+			</tr>
+		</table>
+		<p>
+		<div class="center">
+			<input type="submit" value="가입하기">
+			<input type="reset" value="다시작성">
+			<input type="button" onclick="location.href='/'" value="뒤로가기" >
+		</div>
+	</form>
+</div>
+</body>
+</html>
